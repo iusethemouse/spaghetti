@@ -235,9 +235,9 @@ function buildCell(repoId, rowId, slots) {
       const hole = document.createElement('div');
       hole.className = 'hole';
       hole.dataset.role = 'add-card';
-      labelControl(hole, 'Add pull request');
+      labelControl(hole, 'Add PR');
       hole.dataset.slot = String(index);
-      hole.textContent = '+';
+      hole.textContent = 'add PR +';
       cell.append(hole);
     }
   }
@@ -245,8 +245,8 @@ function buildCell(repoId, rowId, slots) {
   const add = document.createElement('div');
   add.className = 'add';
   add.dataset.role = 'add-card';
-  labelControl(add, 'Add pull request');
-  add.textContent = '+';
+  labelControl(add, 'Add PR');
+  add.textContent = 'add PR +';
   cell.append(add);
   return cell;
 }
@@ -293,8 +293,8 @@ export function renderBundles() {
   const add = document.createElement('button');
   add.className = 'addtag';
   add.dataset.role = 'add-bundle';
-  labelControl(add, 'Add bundle');
-  add.textContent = '+';
+  labelControl(add, 'New board');
+  add.textContent = 'new board +';
   frame.append(add);
   strip.replaceChildren(frame);
 }
@@ -326,8 +326,8 @@ export function renderTags() {
   const add = document.createElement('button');
   add.className = 'addtag';
   add.dataset.role = 'add-tag';
-  labelControl(add, 'Add tag');
-  add.textContent = '+';
+  labelControl(add, 'New tag');
+  add.textContent = 'new tag +';
   frame.append(add);
   bar.replaceChildren(frame);
 }
@@ -338,10 +338,10 @@ function insertionEdge(kind, index) {
   button.className = `insert-edge insert-${kind}`;
   button.dataset.role = `insert-${kind}`;
   button.dataset.index = String(index);
-  button.title = kind === 'row' ? 'Insert row above' : 'Insert repository before';
+  button.title = kind === 'row' ? 'Add row above' : 'Add repo before';
   button.setAttribute('aria-label', button.title);
   const plus = document.createElement('span');
-  plus.textContent = '+';
+  plus.textContent = kind === 'row' ? 'add row +' : 'add repo +';
   button.append(plus);
   return button;
 }
@@ -352,7 +352,7 @@ export function render() {
   const tracks = repos
     .map((repo) => `calc(${slots.get(repo.id)} * (var(--card) + var(--gap)) + var(--add) + 2 * var(--pad))`)
     .join(' ');
-  grid.style.gridTemplateColumns = `var(--rowhead) ${tracks} 36px`;
+  grid.style.gridTemplateColumns = `var(--rowhead) ${tracks} var(--addcol)`;
   const frame = document.createDocumentFragment();
 
   const bucketHead = document.createElement('div');
@@ -392,8 +392,8 @@ export function render() {
   const addCol = document.createElement('div');
   addCol.className = 'addcol';
   addCol.dataset.role = 'add-repo';
-  labelControl(addCol, 'Add repository');
-  addCol.textContent = '+';
+  labelControl(addCol, 'Add repo');
+  addCol.textContent = 'add repo +';
   frame.append(addCol);
 
   rows.forEach((row, index) => {
@@ -422,7 +422,7 @@ export function render() {
   addRow.dataset.role = 'add-row';
   labelControl(addRow, 'Add row');
   addRow.style.gridColumn = '1 / -1';
-  addRow.textContent = '+';
+  addRow.textContent = 'add row +';
   frame.append(addRow);
 
   grid.replaceChildren(frame);

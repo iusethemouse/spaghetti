@@ -158,8 +158,8 @@ function openCardTags(cardId) {
   }
   const add = document.createElement('button');
   add.className = 'row add';
-  labelControl(add, 'Add tag');
-  add.textContent = '+';
+  labelControl(add, 'New tag');
+  add.textContent = 'new tag +';
   add.addEventListener('click', () => {
     const fresh = addTag();
     toggleTag(cardId, fresh.id);

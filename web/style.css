@@ -11,7 +11,8 @@
   --gap: 16px;
   --pad: 8px;
   --tall: 15px;
-  --add: 22px;
+  --add: 80px;
+  --addcol: 100px;
   --rowhead: 52px;
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 13px;
@@ -54,6 +55,8 @@ button:hover { border-color: var(--fg); }
   place-items: center;
   flex: none;
 }
+
+.text-button { height: 24px; padding: 0 8px; flex: none; white-space: nowrap; }
 
 .dot {
   width: 10px;
@@ -278,8 +281,8 @@ body.privacy { display: block; }
   height: 36px;
 }
 
-.addcol { width: 36px; cursor: pointer; }
-.addrow { cursor: pointer; height: auto; min-height: 36px; }
+.addcol { width: var(--addcol); cursor: pointer; white-space: nowrap; }
+.addrow { width: var(--addcol); cursor: pointer; height: auto; min-height: 36px; white-space: nowrap; }
 .addcol:hover, .addrow:hover { color: var(--fg); background: #111; }
 
 .rowhead {
@@ -323,15 +326,19 @@ body.privacy { display: block; }
   position: relative;
   display: grid;
   place-items: center;
-  width: 20px;
+  width: max-content;
+  min-width: 20px;
+  padding: 0 5px;
+  white-space: nowrap;
   height: 20px;
   background: var(--panel);
   border: 1px solid var(--dim);
   color: var(--fg);
   opacity: 0;
+  visibility: hidden;
 }
 .insert-edge:hover::before, .insert-edge:focus-visible::before,
-.insert-edge:hover > span, .insert-edge:focus-visible > span { opacity: 1; }
+.insert-edge:hover > span, .insert-edge:focus-visible > span { opacity: 1; visibility: visible; }
 
 .cell.bucket {
   flex-wrap: wrap;
@@ -378,15 +385,13 @@ body.privacy { display: block; }
 .cell .add {
   width: var(--add);
   flex: none;
-  color: var(--faint);
+  color: var(--dim);
   border: 1px dashed var(--line);
   display: grid;
   place-items: center;
-  opacity: 0;
   cursor: pointer;
 }
 
-.cell:hover .add { opacity: 1; }
 .cell .add:hover { color: var(--fg); border-color: var(--fg); }
 
 .card {
@@ -444,8 +449,8 @@ body.privacy { display: block; }
   flex: none;
   display: grid;
   place-items: center;
-  color: transparent;
-  border: 1px dashed transparent;
+  color: var(--dim);
+  border: 1px dashed var(--line);
   cursor: pointer;
 }
 
@@ -590,7 +595,10 @@ body.privacy { display: block; }
 }
 
 .addtag {
-  width: 26px;
+  width: auto;
+  padding: 0 8px;
+  white-space: nowrap;
+  flex: none;
   height: 26px;
   display: grid;
   place-items: center;
