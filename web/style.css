@@ -81,7 +81,7 @@ button:hover { border-color: var(--fg); }
   z-index: 40;
 }
 
-#brand { color: var(--dim); }
+#brand { font-size: 18px; line-height: 1; flex: none; }
 
 #bundles {
   display: flex;
