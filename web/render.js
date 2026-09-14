@@ -54,12 +54,24 @@ export function flags(data) {
   return node;
 }
 
+export function labelControl(node, text) {
+  node.title = text;
+  node.setAttribute('aria-label', text);
+  return node;
+}
+
 function killer(role) {
   const button = document.createElement('button');
   button.className = 'kill';
   button.textContent = '×';
   button.dataset.role = role;
-  return button;
+  return labelControl(button, {
+    'kill-card': 'Remove pull request',
+    'kill-repo': 'Remove repository',
+    'kill-row': 'Remove row',
+    'bundle-kill': 'Delete bundle',
+    'tag-kill': 'Delete tag'
+  }[role]);
 }
 
 function dot(color) {
@@ -91,12 +103,14 @@ export function buildCard(item) {
   const chips = document.createElement('span');
   chips.className = 'chips';
   chips.dataset.role = 'tags';
+  labelControl(chips, 'Edit tags');
   if (tags.length) for (const held of tags) chips.append(dot(held.color));
   else chips.append(dot(null));
 
   const num = document.createElement('a');
   num.className = 'num';
   num.dataset.role = 'open';
+  num.title = 'Open pull request on GitHub';
   num.textContent = `#${item.number}`;
   num.href = data?.url ?? `https://github.com/${item.repo}/pull/${item.number}`;
   num.target = '_blank';
@@ -137,6 +151,7 @@ export function buildCard(item) {
       grow.dataset.role = 'add-parent';
       grow.dataset.number = String(parent.number);
       grow.textContent = `+#${parent.number}`;
+      labelControl(grow, `Add parent pull request #${parent.number}`);
       base.append(grow);
     }
     refs.append(head, base);
@@ -147,6 +162,7 @@ export function buildCard(item) {
   const plug = document.createElement('span');
   plug.className = 'plug';
   plug.dataset.role = 'plug';
+  plug.title = 'Drag to link a dependency';
 
   node.append(body, rail(data), plug, killer('kill-card'));
   return node;
@@ -166,12 +182,14 @@ export function buildChip(item) {
   const chips = document.createElement('span');
   chips.className = 'chips';
   chips.dataset.role = 'tags';
+  labelControl(chips, 'Edit tags');
   if (tags.length) for (const held of tags) chips.append(dot(held.color));
   else chips.append(dot(null));
 
   const num = document.createElement('a');
   num.className = 'num';
   num.dataset.role = 'open';
+  num.title = 'Open pull request on GitHub';
   num.textContent = `#${item.number}`;
   num.href = data?.url ?? `https://github.com/${item.repo}/pull/${item.number}`;
   num.target = '_blank';
@@ -217,6 +235,7 @@ function buildCell(repoId, rowId, slots) {
       const hole = document.createElement('div');
       hole.className = 'hole';
       hole.dataset.role = 'add-card';
+      labelControl(hole, 'Add pull request');
       hole.dataset.slot = String(index);
       hole.textContent = '+';
       cell.append(hole);
@@ -226,6 +245,7 @@ function buildCell(repoId, rowId, slots) {
   const add = document.createElement('div');
   add.className = 'add';
   add.dataset.role = 'add-card';
+  labelControl(add, 'Add pull request');
   add.textContent = '+';
   cell.append(add);
   return cell;
@@ -258,11 +278,13 @@ export function renderBundles() {
   for (const held of state.doc.bundles) {
     const node = document.createElement('span');
     node.className = 'bundle';
+    node.title = 'Open bundle';
     node.dataset.id = held.id;
     if (held.id === state.doc.active) node.dataset.active = '1';
     const name = document.createElement('span');
     name.className = 'name';
     name.dataset.role = 'bundle-name';
+    name.title = 'Open bundle; double-click to rename';
     name.spellcheck = false;
     name.textContent = held.name;
     node.append(name, killer('bundle-kill'));
@@ -271,6 +293,7 @@ export function renderBundles() {
   const add = document.createElement('button');
   add.className = 'addtag';
   add.dataset.role = 'add-bundle';
+  labelControl(add, 'Add bundle');
   add.textContent = '+';
   frame.append(add);
   strip.replaceChildren(frame);
@@ -281,15 +304,18 @@ export function renderTags() {
   for (const held of state.board.tags) {
     const node = document.createElement('span');
     node.className = 'tag';
+    node.title = 'Filter by tag; drag to tag a pull request';
     node.dataset.id = held.id;
     node.style.borderColor = COLORS[held.color];
 
     const swatch = dot(held.color);
     swatch.dataset.role = 'tag-color';
+    labelControl(swatch, 'Change tag color');
 
     const name = document.createElement('span');
     name.className = 'name';
     name.dataset.role = 'tag-name';
+    name.title = 'Filter by tag; double-click to rename';
     name.spellcheck = false;
     name.textContent = held.name;
 
@@ -300,6 +326,7 @@ export function renderTags() {
   const add = document.createElement('button');
   add.className = 'addtag';
   add.dataset.role = 'add-tag';
+  labelControl(add, 'Add tag');
   add.textContent = '+';
   frame.append(add);
   bar.replaceChildren(frame);
@@ -348,6 +375,7 @@ export function render() {
   repos.forEach((repo, index) => {
     const head = document.createElement('div');
     head.className = 'colhead';
+    head.title = 'Drag to reorder repository';
     head.dataset.repo = repo.id;
     const name = document.createElement('span');
     name.className = 'name';
@@ -364,12 +392,14 @@ export function render() {
   const addCol = document.createElement('div');
   addCol.className = 'addcol';
   addCol.dataset.role = 'add-repo';
+  labelControl(addCol, 'Add repository');
   addCol.textContent = '+';
   frame.append(addCol);
 
   rows.forEach((row, index) => {
     const head = document.createElement('div');
     head.className = 'rowhead';
+    head.title = 'Drag to reorder row';
     head.dataset.row = row.id;
     const ord = document.createElement('span');
     ord.className = 'ord';
@@ -390,6 +420,7 @@ export function render() {
   const addRow = document.createElement('div');
   addRow.className = 'addrow';
   addRow.dataset.role = 'add-row';
+  labelControl(addRow, 'Add row');
   addRow.style.gridColumn = '1 / -1';
   addRow.textContent = '+';
   frame.append(addRow);

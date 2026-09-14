@@ -5,7 +5,7 @@ import {
   addTag, dropTag, nameTag, colorTag, toggleTag,
   addBundle, dropBundle, nameBundle, useBundle, adoptBundle
 } from './state.js';
-import { render, renderTags, flags, markFocus } from './render.js';
+import { render, renderTags, flags, markFocus, labelControl } from './render.js';
 import { encode, decode, summary } from './share.js';
 import { draw } from './wires.js';
 import * as picker from './picker.js';
@@ -36,6 +36,7 @@ function frame() {
   who.textContent = state.viewer?.login ?? '';
   connectionButton.hidden = !api.hosted;
   connectionButton.textContent = api.connected ? 'Token' : 'Connect GitHub';
+  labelControl(connectionButton, api.connected ? 'Manage GitHub token' : 'Connect GitHub');
 }
 
 function openConnection() {
@@ -127,6 +128,7 @@ function place(anchor) {
 
 function row(color, text, on) {
   const node = document.createElement('button');
+  labelControl(node, `${on ? 'Remove' : 'Apply'} tag${text ? `: ${text}` : ''}`);
   node.className = 'row';
   if (on) node.dataset.on = '1';
   const swatch = document.createElement('i');
@@ -156,6 +158,7 @@ function openCardTags(cardId) {
   }
   const add = document.createElement('button');
   add.className = 'row add';
+  labelControl(add, 'Add tag');
   add.textContent = '+';
   add.addEventListener('click', () => {
     const fresh = addTag();
@@ -175,6 +178,7 @@ function openTagColors(tagId) {
   swatches.className = 'strip';
   for (const key of Object.keys(COLORS)) {
     const swatch = document.createElement('i');
+    labelControl(swatch, { a: 'Red', b: 'Orange', c: 'Yellow', d: 'Green', e: 'Cyan', f: 'Blue', g: 'Purple', h: 'Pink' }[key]);
     swatch.className = 'dot';
     swatch.style.background = COLORS[key];
     if (tag(tagId)?.color === key) swatch.dataset.on = '1';

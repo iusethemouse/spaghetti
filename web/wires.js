@@ -133,6 +133,9 @@ export function draw() {
       hit.setAttribute('d', d);
       hit.setAttribute('class', 'hit');
       hit.dataset.link = item.id;
+      const title = document.createElementNS(NS, 'title');
+      title.textContent = 'Remove dependency';
+      hit.append(title);
       hit.addEventListener('click', () => unlink(item.id));
       svg.append(hit);
     }

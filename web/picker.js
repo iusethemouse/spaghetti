@@ -14,6 +14,7 @@ function paint(items) {
   items.forEach((item, index) => {
     const li = document.createElement('li');
     li.dataset.index = String(index);
+    li.title = [item.lead, item.main, item.sub].filter(Boolean).join(' · ');
     if (index === active) li.dataset.active = '1';
     if (item.used) li.dataset.used = '1';
     if (item.lead) {

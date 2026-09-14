@@ -14,13 +14,13 @@
     <span id="brand">▚</span>
     <span id="bundles"></span>
     <span class="spacer"></span>
-    <button id="isolate" hidden></button>
-    <button id="refresh" class="icon">↻</button>
-    <button id="share" class="icon">↗</button>
-    <button id="adopt" class="icon">↙</button>
+    <button id="isolate" title="Clear tag filter" aria-label="Clear tag filter" hidden></button>
+    <button id="refresh" class="icon" title="Refresh" aria-label="Refresh">↻</button>
+    <button id="share" class="icon" title="Export" aria-label="Export">↗</button>
+    <button id="adopt" class="icon" title="Import" aria-label="Import">↙</button>
     <span id="who"></span>
-    <button id="connection-button" hidden>Connect GitHub</button>
-    <button id="help" class="icon">?</button>
+    <button id="connection-button" title="Connect GitHub" hidden>Connect GitHub</button>
+    <button id="help" class="icon" title="How it works" aria-label="How it works">?</button>
   </header>
 
   <main id="stage">
@@ -79,9 +79,9 @@
       <p class="hint"><a href="privacy.html" target="_blank" rel="noreferrer">privacy note</a></p>
       <p id="connection-error" role="alert" hidden></p>
       <div class="actions">
-        <button id="connect" type="submit">Connect</button>
-        <button id="connection-close" type="button">Cancel</button>
-        <button id="disconnect" type="button" hidden>Forget token</button>
+        <button id="connect" type="submit" title="Connect GitHub">Connect</button>
+        <button id="connection-close" type="button" title="Cancel">Cancel</button>
+        <button id="disconnect" type="button" title="Forget token" hidden>Forget token</button>
       </div>
     </form>
   </dialog>
