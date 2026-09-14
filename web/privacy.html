@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" class="privacy">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>spaghetti and your data</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+
+<body class="privacy">
+  <article>
+    <p><a href="/">← back</a></p>
+    <h1>This is a fully client-side static website.</h1>
+    <p>There's no server side, meaning your token is used to communicate with api.github.com using the Authorization
+      header.</p>
+    <p>Browser storage is used for persisting the state of your spaghetti.</p>
+    <p>You can trace requests:</p>
+    <ol>
+      <li>Developer Tools -> Network. clear the list, then refresh. Requests go only to <code>api.github.com</code>, and
+        this domain just serves static files</li>
+      <li>Edit a board, then export or import its share string.</li>
+      <li>Check out Application/Storage to see the local board and tab token.</li>
+      <li>Check the <a href="https://github.com/iusethemouse/spaghetti" target="_blank" rel="noreferrer">source</a>.
+      </li>
+    </ol>
+  </article>
+</body>
+
+</html>

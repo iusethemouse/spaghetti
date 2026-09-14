@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>spaghetti</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+
+<body>
+  <header id="bar">
+    <span id="brand">▚</span>
+    <span id="bundles"></span>
+    <span class="spacer"></span>
+    <button id="isolate" hidden></button>
+    <button id="refresh" class="icon">↻</button>
+    <button id="share" class="icon">↗</button>
+    <button id="adopt" class="icon">↙</button>
+    <span id="who"></span>
+    <button id="connection-button" hidden>Connect GitHub</button>
+    <button id="help" class="icon">?</button>
+  </header>
+
+  <main id="stage">
+    <svg id="wires">
+      <defs>
+        <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L8 4 L0 8 z" fill="context-stroke"></path>
+        </marker>
+        <marker id="dot" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5">
+          <circle cx="3" cy="3" r="2.5" fill="context-stroke"></circle>
+        </marker>
+      </defs>
+    </svg>
+    <div id="grid"></div>
+  </main>
+
+  <footer id="tags"></footer>
+
+  <div id="modal" hidden>
+    <div id="picker">
+      <input id="query" autocomplete="off" spellcheck="false">
+      <ul id="results"></ul>
+    </div>
+  </div>
+
+  <div id="guide" hidden>
+    <article>
+      <p>This tool allows you visualise pull request spaghetti.</p>
+      <p>You can add repositories as columns, and then pull requests as cards within their cells. You can then add rows
+        to the grid and arrange the pull request cards as you wish. If the branch targeted by a pull request has an open
+        pull request itself, you can click the "#XX" button next to the branch name to automatically add that pull
+        request to the grid.</p>
+      <p>PRs can be arranged in any way you like, and you can connect them to indicate a dependency.</p>
+      <p>You can also create tags at the bottom of the page, and assign them to PRs by clicking the empty circle in the
+        top left corner of the card.</p>
+      <p>guten!</p>
+    </article>
+  </div>
+
+  <div id="menu" hidden></div>
+  <div id="toast" hidden></div>
+
+  <dialog id="connection" aria-labelledby="connection-title">
+    <form id="token-form">
+      <h1 id="connection-title">Connect GitHub</h1>
+      <p>Paste your personal access token</p>
+      <label for="token">GitHub token</label>
+      <input id="token" type="password" autocomplete="off" spellcheck="false" required
+        placeholder="github_pat_… or ghp_…">
+      <details>
+        <summary>Organization</summary>
+        <label for="organization">Search repositories in</label>
+        <input id="organization" autocomplete="off" spellcheck="false" placeholder="All accessible repositories"
+          maxlength="39">
+      </details>
+      <p class="hint"><a href="privacy.html" target="_blank" rel="noreferrer">privacy note</a></p>
+      <p id="connection-error" role="alert" hidden></p>
+      <div class="actions">
+        <button id="connect" type="submit">Connect</button>
+        <button id="connection-close" type="button">Cancel</button>
+        <button id="disconnect" type="button" hidden>Forget token</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
