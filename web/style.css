@@ -12,6 +12,7 @@
   --pad: 8px;
   --tall: 15px;
   --add: 22px;
+  --rowhead: 52px;
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   font-size: 13px;
   color-scheme: dark;
@@ -221,7 +222,7 @@ body.privacy { display: block; }
 }
 
 .corner, .rowhead, .addrow {
-  width: 36px;
+  width: var(--rowhead);
   position: sticky;
   left: 0;
   z-index: 12;

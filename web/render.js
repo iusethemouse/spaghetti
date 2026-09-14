@@ -352,7 +352,7 @@ export function render() {
   const tracks = repos
     .map((repo) => `calc(${slots.get(repo.id)} * (var(--card) + var(--gap)) + var(--add) + 2 * var(--pad))`)
     .join(' ');
-  grid.style.gridTemplateColumns = `36px ${tracks} 36px`;
+  grid.style.gridTemplateColumns = `var(--rowhead) ${tracks} 36px`;
   const frame = document.createDocumentFragment();
 
   const bucketHead = document.createElement('div');
@@ -360,7 +360,7 @@ export function render() {
   bucketHead.dataset.row = ARCHIVE;
   const mark = document.createElement('span');
   mark.className = 'ord';
-  mark.textContent = '−1';
+  mark.textContent = 'merged';
   bucketHead.append(mark);
   frame.append(bucketHead);
   for (const repo of repos) frame.append(buildBucket(repo.id));
