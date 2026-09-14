@@ -5,3 +5,4 @@ site/
 .wrangler/
 .dev.vars*
 .env*
+/tech-notes.txt
