@@ -70,6 +70,21 @@
       <label for="token">GitHub token</label>
       <input id="token" type="password" autocomplete="off" spellcheck="false" required
         placeholder="github_pat_… or ghp_…">
+      <details id="token-instructions">
+        <summary>Instructions</summary>
+        <ol class="hint">
+          <li>Open <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer">GitHub token
+              settings</a>
+            -> Generate new token -> Generate new token (classic).</li>
+          <li>Name it <code>spaghetti</code>, choose an expiration, and select the <code>repo</code> scope.</li>
+          <li>Generate the token and copy it.</li>
+          <li>Beside the token, click Configure SSO → Authorize for your organization.
+            <a href="https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on"
+              target="_blank" rel="noreferrer">SSO help</a>
+          </li>
+          <li>Paste it above and click Connect.</li>
+        </ol>
+      </details>
       <details>
         <summary>Organization</summary>
         <label for="organization">Search repositories in</label>

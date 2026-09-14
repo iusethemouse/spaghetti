@@ -147,6 +147,8 @@ button:hover { border-color: var(--fg); }
 #connection details { margin-top: 16px; }
 #connection summary { cursor: pointer; color: var(--dim); }
 #connection .hint { color: var(--dim); font-size: 12px; }
+#token-instructions ol { padding-left: 20px; line-height: 1.6; }
+#token-instructions li + li { margin-top: 6px; }
 #connection a { color: inherit; }
 #connection-error { color: #ff5f56; }
 #connection .actions { display: flex; gap: 8px; margin-top: 20px; }
