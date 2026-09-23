@@ -1,0 +1,13 @@
+{
+  "name": "spaghetti",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.mjs",
+    "build": "node build.mjs"
+  },
+  "bin": {
+    "spaghetti": "dist/spaghetti.mjs"
+  }
+}

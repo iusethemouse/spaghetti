@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>spaghetti</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+
+<body>
+  <header id="bar">
+    <span id="bundles"></span>
+    <span class="spacer"></span>
+    <button id="isolate" title="Clear tag filter" aria-label="Clear tag filter" hidden></button>
+    <button id="refresh" class="icon" title="Refresh" aria-label="Refresh">↻</button>
+    <button id="share" class="icon" title="Export" aria-label="Export">↗</button>
+    <button id="adopt" class="icon" title="Import" aria-label="Import">↙</button>
+    <span id="who"></span>
+    <span id="brand" role="img" aria-label="Spaghetti" title="Spaghetti">🍝</span>
+  </header>
+
+  <main id="stage">
+    <svg id="wires">
+      <defs>
+        <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L8 4 L0 8 z" fill="context-stroke"></path>
+        </marker>
+        <marker id="dot" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5">
+          <circle cx="3" cy="3" r="2.5" fill="context-stroke"></circle>
+        </marker>
+      </defs>
+    </svg>
+    <div id="grid"></div>
+  </main>
+
+  <footer id="tags"></footer>
+
+  <div id="modal" hidden>
+    <div id="picker">
+      <input id="query" autocomplete="off" spellcheck="false">
+      <ul id="results"></ul>
+    </div>
+  </div>
+
+  <div id="menu" hidden></div>
+  <div id="toast" hidden></div>
+
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
